@@ -12,7 +12,12 @@ import java.util.Date;
 public class HelloScheduler {
     public static void main(String[] args) throws SchedulerException {
         //创建一个JobDetail实例,将该实例与HelloJob Class绑定
-        JobDetail jobDetail = JobBuilder.newJob(HelloJob.class).withIdentity("myJob", "group1").build();
+        JobDetail jobDetail = JobBuilder.newJob(HelloJob.class)
+                .withIdentity("myJob").build();
+        System.out.println("jobDetail's name: " + jobDetail.getKey().getName());
+        System.out.println("jobDetail's group: " + jobDetail.getKey().getGroup());
+        System.out.println("jobDetail's jobClass: " + jobDetail.getJobClass().getName());
+
         //创建一个Trigger实例, 定义该Job立即执行,并且每隔2秒重复执行
         Trigger trigger = TriggerBuilder.newTrigger()
                 .withIdentity("myTrigger", "group1")
