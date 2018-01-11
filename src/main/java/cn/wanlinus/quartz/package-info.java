@@ -35,6 +35,9 @@
  * StartTime:  表示触发器的时间表首次被触发的时间 他的值的类型是Java.util.Date
  * <p>
  * EndTime:     指定触发器的不在触发的时间 他的值的类型是Java.util.Date
+ * <p>
+ * SimpleTrigger的作用
+ * 在一个指定的时间段内执行一次作用任务 或是在指定的时间即那个内多次执行
  *
  * @author wanli
  */

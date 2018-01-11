@@ -19,26 +19,19 @@ public class HelloScheduler {
         JobDetail jobDetail = JobBuilder.newJob(HelloJob.class)
                 .withIdentity("myJob")
                 .build();
-        //获取当前时间后3秒执行
-        date.setTime(date.getTime() + 3000);
-        //获取当前时间后6秒的时间
-        Date endDate = new Date();
-        endDate.setTime(endDate.getTime() + 6000);
-        //创建一个Trigger实例, 定义该Job立即执行,并且每隔2秒重复执行
-        Trigger trigger = TriggerBuilder.newTrigger()
+        //距离当前时间4秒后执行且仅执行一次任务
+        date.setTime(date.getTime() + 4000L);
+        SimpleTrigger trigger = TriggerBuilder.newTrigger()
                 .withIdentity("myTrigger", "group1")
                 .startAt(date)
-                .endAt(endDate)
-                .withSchedule(
-                        SimpleScheduleBuilder.simpleSchedule()
-                                .withIntervalInSeconds(2).repeatForever())
+                .withSchedule(SimpleScheduleBuilder.simpleSchedule()
+                        .withIntervalInSeconds(2)
+                        .withRepeatCount(SimpleTrigger.REPEAT_INDEFINITELY))//循环
                 .build();
         //创建Schedule实例
         SchedulerFactory sfact = new StdSchedulerFactory();
         Scheduler scheduler = sfact.getScheduler();
         scheduler.start();
-
-
         scheduler.scheduleJob(jobDetail, trigger);
     }
 }
