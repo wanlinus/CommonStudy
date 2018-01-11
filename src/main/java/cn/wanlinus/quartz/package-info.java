@@ -38,6 +38,9 @@
  * <p>
  * SimpleTrigger的作用
  * 在一个指定的时间段内执行一次作用任务 或是在指定的时间即那个内多次执行
+ * 注意:
+ * 重复次数可以为0,正整数或是SimpleTrigger.REPEAT_INDEFINITELY常量值
+ * 重复的执行间隔必须为0或长整数, 一旦被执行了endTime参数,那么它会覆盖重复次数参数的效果
  *
  * @author wanli
  */
