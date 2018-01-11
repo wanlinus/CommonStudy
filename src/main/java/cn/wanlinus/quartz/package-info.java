@@ -58,7 +58,11 @@
  * 月        是    1-12或者JAN-DEC , - * /
  * 周        是    1-7或者SUN-SAT  , - * / L C #
  * 年        否    empty, 1970-2099, - * /
- *
+ * <p>
+ * StdSchedulerFactory
+ * 使用一组参数java.util.Properties来创建和初始化Quartz调度器
+ * 配置参数一般存储在quartz.properties中
+ * 调用getScheduler方法就能创建和初始化调度器对象
  * @author wanli
  */
 package cn.wanlinus.quartz;

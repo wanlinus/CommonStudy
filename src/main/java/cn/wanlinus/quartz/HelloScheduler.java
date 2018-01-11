@@ -10,7 +10,7 @@ import java.util.Date;
  * @author wanli
  */
 public class HelloScheduler {
-    public static void main(String[] args) throws SchedulerException {
+    public static void main(String[] args) throws SchedulerException, InterruptedException {
         Date date = new Date();
         //打印当前时间 格式是为2018-1-4 20:30:09
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -22,7 +22,7 @@ public class HelloScheduler {
 //        每秒钟触发一次任务
         CronTrigger trigger = (CronTrigger) TriggerBuilder.newTrigger()
                 .withIdentity("myTrigger", "group1")
-                .withSchedule(CronScheduleBuilder.cronSchedule("0 35 1 ? * * 2018"))
+                .withSchedule(CronScheduleBuilder.cronSchedule("* * * * * ?"))
                 .build();
         //1. 2018年内每天10点15分触发一次
         //      0 15 10 ? * * 2018
@@ -36,6 +36,10 @@ public class HelloScheduler {
         SchedulerFactory sfact = new StdSchedulerFactory();
         Scheduler scheduler = sfact.getScheduler();
         scheduler.start();
-        scheduler.scheduleJob(jobDetail, trigger);
+        System.out.println(scheduler.scheduleJob(jobDetail, trigger));
+        Thread.sleep(2000);
+        scheduler.standby();
+        Thread.sleep(2000);
+        scheduler.start();
     }
 }
