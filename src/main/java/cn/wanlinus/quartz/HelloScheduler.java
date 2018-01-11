@@ -19,15 +19,19 @@ public class HelloScheduler {
         JobDetail jobDetail = JobBuilder.newJob(HelloJob.class)
                 .withIdentity("myJob")
                 .build();
-        //距离当前时间4秒后执行且仅执行一次任务
-        date.setTime(date.getTime() + 4000L);
-        SimpleTrigger trigger = TriggerBuilder.newTrigger()
+//        每秒钟触发一次任务
+        CronTrigger trigger = (CronTrigger) TriggerBuilder.newTrigger()
                 .withIdentity("myTrigger", "group1")
-                .startAt(date)
-                .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                        .withIntervalInSeconds(2)
-                        .withRepeatCount(SimpleTrigger.REPEAT_INDEFINITELY))//循环
+                .withSchedule(CronScheduleBuilder.cronSchedule("0 35 1 ? * * 2018"))
                 .build();
+        //1. 2018年内每天10点15分触发一次
+        //      0 15 10 ? * * 2018
+        //2. 每天的14点整至14点59分55秒触发一次
+        //      0/5 * 14,18 * * ?
+        //3. 每月周一至周五的十点15分触发一次
+        //4. 每月最后一天的10点15分触发一次
+        //5. 每月第三个周五的10点15触发一次
+
         //创建Schedule实例
         SchedulerFactory sfact = new StdSchedulerFactory();
         Scheduler scheduler = sfact.getScheduler();
