@@ -9,6 +9,34 @@ import java.util.Date;
  * @author wanli
  */
 public class HelloJob implements Job {
+    private String message;
+    private Float floatJobValue;
+    private Double doubleTriggerValue;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Float getFloatJobValue() {
+        return floatJobValue;
+    }
+
+    public void setFloatJobValue(Float floatJobValue) {
+        this.floatJobValue = floatJobValue;
+    }
+
+    public Double getDoubleTriggerValue() {
+        return doubleTriggerValue;
+    }
+
+    public void setDoubleTriggerValue(Double doubleTriggerValue) {
+        this.doubleTriggerValue = doubleTriggerValue;
+    }
+
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         //打印当前的执行时间,格式为2018-1-4 20:15:14
@@ -23,11 +51,8 @@ public class HelloJob implements Job {
         TriggerKey triggerKey = jobExecutionContext.getTrigger().getKey();
         System.out.println("My trigger name and group are:" + triggerKey.getName() + ":"
                 + triggerKey.getGroup());
-        JobDataMap jobDataMap = jobExecutionContext.getJobDetail().getJobDataMap();
-        JobDataMap triggerDataMap = jobExecutionContext.getTrigger().getJobDataMap();
-        String jobMsg = jobDataMap.getString("message");
-        Float jobFloatValue = jobDataMap.getFloatValue("floatJobValue");
-        String triggerMsg = triggerDataMap.getString("message");
-        Double doubleTriggerValue = triggerDataMap.getDouble("doubleTriggerValue");
+        System.out.println("floatJobValue is:" + floatJobValue);
+        System.out.println("message is: " + message);
+        System.out.println("triggerDoubleValue is: " + doubleTriggerValue);
     }
 }
