@@ -25,6 +25,16 @@
  * 1. 在进行任务调度时JobDataMap存储在JobExecutionContext中,非常方便获取
  * 2. JobDataMap可以用来装载任何可序列化的数据对象,当job实例对象被执行时这些参数对象会传递给他
  * 3. JobDataMap事项了JDK的Map接口, 并且添加了一些非常方便的方法用来存取基本数据类型
+ * <p>
+ * Trigger
+ * Quartz的触发器同来告诉调度程序作业什么时候触发
+ * 即Trigger对象是用来触发执行Job的
+ * 通用属性
+ * JobKey:     表示Job实例的标识, 触发器被触发时,该指定的Job实例会执行
+ * <p>
+ * StartTime:  表示触发器的时间表首次被触发的时间 他的值的类型是Java.util.Date
+ * <p>
+ * EndTime:     指定触发器的不在触发的时间 他的值的类型是Java.util.Date
  *
  * @author wanli
  */
